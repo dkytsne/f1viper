@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3mf1fjflxb2l"]
+
+[ext_resource type="Script" path="res://Scripts/PlayerMain.gd" id="1_wsl8d"]
+[ext_resource type="Texture2D" uid="uid://sxsaigvrifx" path="res://Assets/Art/Player/car.png" id="2_c45j3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dwmnl"]
+size = Vector2(6.01026, 15.9949)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+motion_mode = 1
+slide_on_ceiling = false
+script = ExtResource("1_wsl8d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.00513207, 0.00127578)
+rotation = -0.00128259
+shape = SubResource("RectangleShape2D_dwmnl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_c45j3")
+
+[node name="Camera2D" type="Camera2D" parent="."]
