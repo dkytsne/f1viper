@@ -1,7 +1,6 @@
 extends CharacterBody2D
 
 var maxSpeed = 300.0
-var maxDecelSpeed = 50.0
 var acceleration = 50.0
 var rotationSpeed = 1.0
 
@@ -24,3 +23,18 @@ func _physics_process(delta):
 		rotation += horDir * effectiveRotationSpeed * delta * 2
 
 	move_and_slide()
+
+
+func onOffroadBodyEntered(body: Node2D):
+	acceleration = 12.5
+	maxSpeed = 75.0
+
+
+func onOffroadBodyExited(body: Node2D):
+	acceleration = 50.0
+	maxSpeed = 300.0
+
+
+func onFinishLineBodyEntered(body: Node2D):
+	if body.has_method("lapEnd"):
+		body.lapEnd()

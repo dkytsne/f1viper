@@ -1,10 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://b3mf1fjflxb2l"]
+[gd_scene load_steps=6 format=3 uid="uid://b3mf1fjflxb2l"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerMain.gd" id="1_wsl8d"]
 [ext_resource type="Texture2D" uid="uid://sxsaigvrifx" path="res://Assets/Art/Player/car.png" id="2_c45j3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dwmnl"]
 size = Vector2(6.01026, 15.9949)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2kwb"]
+size = Vector2(6, 15.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ecniw"]
+size = Vector2(10, 21)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 motion_mode = 1
@@ -20,3 +26,23 @@ shape = SubResource("RectangleShape2D_dwmnl")
 texture = ExtResource("2_c45j3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="offroadDetect" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="offroadDetect"]
+position = Vector2(0, 0.25)
+shape = SubResource("RectangleShape2D_b2kwb")
+
+[node name="finishLine" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="finishLine"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_ecniw")
+
+[connection signal="body_entered" from="offroadDetect" to="." method="onOffroadBodyEntered"]
+[connection signal="body_exited" from="offroadDetect" to="." method="onOffroadBodyExited"]
+[connection signal="body_entered" from="finishLine" to="." method="onFinishLineBodyEntered"]
